@@ -1,0 +1,35 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    int t;
+    std::cin >> t;
+    std::cin.ignore(); // Ignore the newline character after reading t
+
+    while (t--) {
+        std::string s;
+        std::getline(std::cin, s);
+        std::vector<int> bal(s.length() + 1, 0);
+
+        int x = s.find('-');
+        int y = s.rfind('+', s.length() - 1);
+        y = (y >= x) ? y : x;
+
+        std::swap(s[x], s[y]);
+
+        for (int i = 0; i < s.length(); ++i) {
+            bal[i + 1] = bal[i] + ((s[i] == '-') ? -1 : 1);
+        }
+
+        auto minBal = std::min_element(bal.begin(), bal.end());
+
+        if (*minBal == 0) {
+            std::cout << x + 1 << " " << y + 1 << std::endl;
+        } else {
+            std::cout << "-1" << std::endl;
+        }
+    }
+
+    return 0;
+}
