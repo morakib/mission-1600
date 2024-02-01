@@ -1,0 +1,44 @@
+#include                  <bits/stdc++.h>
+using                     namespace std;
+#define YES               cout<<"YES\n";
+#define NO                cout<<"NO\n";
+#define ll                long long
+#define nl                <<"\n"
+#define op                cout<<
+#define ip                cin>>
+#define FOR(x,y,z)        for(int i=x;i<=y;i+=z)
+#define arinput(p,x,y,z)  FOR(x,y,z) ip p[i];
+#define all(v)            v.begin(),v.end()
+#define pb(x)             push_back(x)
+#define pob               pop_back()
+typedef pair<ll,ll>       pll;
+typedef vector<pll>       vpll;
+typedef map<ll,ll>        mll;
+typedef vector<ll>        vll;
+#define fastio            ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+#define w(x)              int x;cin>>x;while(x--)
+const int                 M = 1e9+7;
+const int                 N = 1e5+10;
+#define                   INF (1LL<<62)
+ll dp[N];
+int main(){
+    string s;
+    cin>>s;
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='m' || s[i]=='w'){
+            cout<<"0\n";
+            return 0;
+        }
+    }
+    dp[0]=1;
+    dp[1]=1;
+    for(int i=2;i<=s.size();i++){
+        if(s.substr(i-2,2)=="uu" || s.substr(i-2,2)=="nn"){
+            dp[i]=(dp[i-1]%M+dp[i-2]%M)%M;
+        }else{
+            dp[i]=dp[i-1]%M;
+        }
+    }
+    cout<<dp[s.size()]%M<<"\n";
+
+}
