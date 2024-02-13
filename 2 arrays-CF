@@ -1,0 +1,129 @@
+// #include<bits/stdc++.h>
+// using namespace std;
+// vector<int> primeFactorize(int n) {
+//     vector<int> factors;
+//     while (n % 2 == 0) factors.push_back(2), n /= 2;
+//     for (int i = 3; i * i <= n; i += 2) while (n % i == 0) factors.push_back(i),n /= i;
+//     if (n > 2) factors.push_back(n);
+// 	return factors;
+// }
+// vector<int> intersection(vector<int>& nums1, vector<int>& nums2) {
+//     vector<int> result;
+//     int i = 0, j = 0;
+//     vector<int> sorted_nums1 = nums1;
+//     vector<int> sorted_nums2 = nums2;
+//     sort(sorted_nums1.begin(), sorted_nums1.end());
+//     sort(sorted_nums2.begin(), sorted_nums2.end());
+//     while (i < sorted_nums1.size() && j < sorted_nums2.size()) {
+//         if (sorted_nums1[i] == sorted_nums2[j]) {
+//             result.push_back(sorted_nums1[i]);
+//             i++;
+//             j++;
+//         } else if (sorted_nums1[i] < sorted_nums2[j]) {
+//             i++;
+//         } else {
+//             j++;
+//         }
+//     }
+//     return result;
+// }
+// void solve(){
+// 	int a,b;
+// 	cin>>a>>b;
+// 	vector<int>facta=primeFactorize(a);
+// 	vector<int>factb=primeFactorize(b);
+//     vector<int>factc=intersection(facta,factb);
+// 	int q;cin>>q;
+// 	while(q--){
+// 		int h,l;
+// 		cin>>l>>h;
+// 		int x=1;
+//         for(int i=0;factc.size() && i<factc.size();){
+//             while(l>x && i<factc.size()){
+//                 x*=factc[i];
+//                 i++;
+//             }
+//             if(x>h){
+//                 cout<<-1<<"\n";
+//                 break;
+//             }
+//             while(x<h && i<factc.size()){
+//                 x*=factc[i];
+//                 i++;
+//             }
+//             cout<<x<<"\n";
+            
+//         }
+// 	}
+// 	// for(auto i:factc){
+// 	// 	cout<<i<<" ";
+// 	// }
+// 	cout<<"\n";
+// 	// for(auto i:factb){
+// 	// 	cout<<i<<" ";
+// 	// }
+// 	// cout<<"\n";
+// }
+// int main(){
+// 	int t=1; //cin>>t; 
+// 	while(t--) solve();	
+	
+// }
+// //9 ->3 3
+// //27->3 3 3
+#include                  <bits/stdc++.h>
+using                     namespace std;
+#define YES               cout<<"YES\n";
+#define NO                cout<<"NO\n";
+#define ll                long long
+#define nl                <<"\n"
+#define op                cout<<
+#define ip                cin>>
+#define FOR(x,y,z)        for(int i=x;i<=y;i+=z)
+#define arinput(p,x,y,z)  FOR(x,y,z) ip p[i];
+#define all(v)            v.begin(),v.end()
+#define pb(x)             push_back(x)
+typedef pair<ll,ll>       pll;
+typedef vector<pll>       vpll;
+typedef map<ll,ll>        mll;
+typedef vector<ll>        vll;
+#define fastio            ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+const int                 M = 1e9+7;
+const int                 N = 1e6+10;
+#define                   INF (1LL<<62)
+const int                 mod =1e9+7;
+ll fact[1200];
+ll binexp(ll a,ll b ){
+    if(b==0) return 1;
+    if(b%2==0){
+        ll x=binexp(a,b/2);
+        return (x*x)% mod;
+    }else{
+        ll x=binexp(a,b/2);
+        return ((x*x)% mod *a)% mod;
+    }
+}
+ll inmod(ll a){
+    return binexp(a,mod-2);
+}
+ll ncrmod(ll n,ll r){
+    if(r==0) return 1;
+    if(r>n)  return 0;
+    return (fact[n]* inmod((fact[r]*fact[n-r])%mod))% mod;
+}
+int main(){
+    int t=1;
+    //cin>>t;
+    fastio
+    while (t--)
+    {
+        ll n,m;
+        cin>>n>>m;
+        fact[0]=1;
+        fact[1]=1;
+        for(ll i=2;i<=1199;i++){
+            fact[i]=(i*fact[i-1]) % mod;
+        }
+        cout<<ncrmod(n+2*m-1,2*m);
+    } 
+}
