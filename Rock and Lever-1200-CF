@@ -1,0 +1,50 @@
+#include                  <bits/stdc++.h>
+using                     namespace std;
+#define YES               cout<<"YES\n";
+#define NO                cout<<"NO\n";
+#define ll                long long
+#define nl                cout<<"\n";
+#define op                cout<<
+#define ip                cin>>
+#define FOR(x,y,z)        for(int i=x;i<=y;i+=z)
+#define arinput(p,x,y,z)  FOR(x,y,z) ip p[i];
+#define all(v)            v.begin(),v.end()
+#define pb(x)             push_back(x)
+typedef pair<ll,ll>       pll;
+typedef vector<pll>       vpll;
+typedef map<ll,ll>        mll;
+typedef vector<ll>        vll;
+#define fastio            ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+const int                 M = 1e9+7;
+const int                 N = 2e5+10;
+#define                   INF (1LL<<62)
+
+ll countLeftmostSetBit(ll n) {
+    if (n == 0) return 32;
+    return 31 - __builtin_clz(n);
+}
+
+//1&1=1 > 1^1=0 only for this case we have to check the bit where we get same same
+
+int main(){
+	fastio
+	int t;
+    cin>>t;
+    while(t--){
+        ll n;
+        cin>>n;
+        map<ll,ll>mp;
+        for(int i=0;i<n;i++){
+            ll x;
+            cin>>x;
+            mp[countLeftmostSetBit(x)]++;
+        }
+        ll ans=0;
+        //as i<j 
+        for(auto i:mp){
+            ans+=(i.second*(i.second-1))/2;
+        }
+        cout<<ans<<'\n';
+       
+    }
+}
