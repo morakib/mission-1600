@@ -1,0 +1,50 @@
+#include                  <bits/stdc++.h>
+using                     namespace std;
+#define YES               cout<<"YES\n";
+#define NO                cout<<"NO\n";
+#define ll                long long
+#define nl                cout<<"\n";
+#define op                cout<<
+#define ip                cin>>
+#define FOR(x,y,z)        for(int i=x;i<=y;i+=z)
+#define arinput(p,x,y,z)  FOR(x,y,z) ip p[i];
+#define all(v)            v.begin(),v.end()
+#define pb(x)             push_back(x)
+typedef pair<ll,ll>       pll;
+typedef vector<pll>       vpll;
+typedef map<ll,ll>        mll;
+typedef vector<ll>        vll;
+#define fastio            ios::sync_with_stdio(0);cin.tie(0);cout.tie(0);
+const int                 M = 1e9+7;
+const int                 N = 2e5+10;
+#define                   INF (1LL<<62)
+int main(){
+	fastio
+	int t=1;
+	cin>>t;
+	while(t--){
+		int n,x,y;
+		cin>>n>>x>>y;
+		int a[n+3];
+		for(int i=0;i<n;i++){
+			cin>>a[i];
+		}
+		map<pair<int,int>,int>mp;
+		ll ans=0;
+
+//(Ai+Aj )%x=0==> Ai%x + Aj%x =>eder value { 0--(x-1) er majhe lie korbe} Ai%x = x- Aj%x
+//(Ai-Aj )%x=0==> Ai%x - Aj%x =>eta true hobe jodi Ai-Aj=0,x,2x hoi ,,0 sara smvb na tai Ai%x=Aj%x
+
+		for(int i=0;i<n;i++){
+			int modx=a[i]%x;
+			int mody=a[i]%y;
+			int req1=(x-modx)%x;
+			int req2=mody;
+			ans+=(mp[{modx,mody}]);
+			mp[{req1,req2}]++;
+			//req ta hossse x theke bad er por
+		}
+		cout<<ans<<"\n";
+	}
+}
+
